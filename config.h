@@ -35,7 +35,8 @@
 #define DIODE_DIRECTION COL2ROW
 
 #define USE_SERIAL
-#define SOFT_SERIAL_PIN D2  
+#define SOFT_SERIAL_PIN D1 /* change when adding an oled display collide with i2c */
+
 
 
 #define EE_HANDS
@@ -46,6 +47,7 @@
 #define RGBLED_SPLIT { 2, 2 }
 #define RGBLED_NUM 4
 #define RGBLIGHT_LED_MAP {  0,  1,  2,  3 }
+#define RGBLIGHT_LAYERS
 
 //#ifdef RGB_DI_PIN
 //#    define RGBLED_NUM 16
