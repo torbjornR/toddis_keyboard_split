@@ -13,7 +13,8 @@
 #define PRODUCT      toddis_keyboard_splitt
 
 /* key matrix size */
-#define MATRIX_ROWS 4
+/* Rows are doubled up */
+#define MATRIX_ROWS 8
 #define MATRIX_COLS 12
 
 /*
@@ -33,23 +34,18 @@
 /* COL2ROW, ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
-/*
- * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
- */
 #define SOFT_SERIAL_PIN D2  // or D1, D2, D3, E6
+
+#define EE_HANDS
+
 #define MASTER_LEFT
-#define SPLIT_USB_DETECT
-//#define LED_NUM_LOCK_PIN B0
-//#define LED_CAPS_LOCK_PIN B1
-//#define LED_SCROLL_LOCK_PIN B2
-//#define LED_COMPOSE_PIN B3
-//#define LED_KANA_PIN B4
 
-//#define BACKLIGHT_PIN B7
-//#define BACKLIGHT_LEVELS 3
-//#define BACKLIGHT_BREATHING
 
-//#define RGB_DI_PIN E2
+#define RGB_DI_PIN D5
+#define RGBLED_SPLIT { 2, 2 }
+#define RGBLED_NUM 4
+#define RGBLIGHT_LED_MAP {  0,  1,  2,  3 }
+
 //#ifdef RGB_DI_PIN
 //#    define RGBLED_NUM 16
 //#    define RGBLIGHT_HUE_STEP 8

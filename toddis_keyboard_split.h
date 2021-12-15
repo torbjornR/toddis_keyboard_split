@@ -33,5 +33,5 @@
     { k06, k07, k08, k09, k0A, k0B }, \
     { k16, k17, k18, k19, k1A, k1B }, \
     { k26, k27, k28, k29, k2A, k2B }, \
-    { XXX, XXX, XXX, b36, b37, b38 }  \
+    { XXX, XXX, XXX, k36, k37, k38 }  \
 }
