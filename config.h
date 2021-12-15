@@ -13,7 +13,8 @@
 #define PRODUCT      toddis_keyboard_splitt
 
 /* key matrix size */
-#define MATRIX_ROWS 4
+/* Rows are doubled up */
+#define MATRIX_ROWS 8
 #define MATRIX_COLS 12
 
 /*
