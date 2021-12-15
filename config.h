@@ -39,9 +39,10 @@
 #define SPLIT_USB_DETECT
 
 #define RGB_DI_PIN D5
-// #define RGBLED_NUM 1
-#define RGBLED_SPLIT 2
-//#define RGB_DI_PIN E2
+#define RGBLED_SPLIT { 2, 2 }
+#define RGBLED_NUM 4
+#define RGBLIGHT_LED_MAP {  0,  1,  2,  3 }
+
 //#ifdef RGB_DI_PIN
 //#    define RGBLED_NUM 16
 //#    define RGBLIGHT_HUE_STEP 8
