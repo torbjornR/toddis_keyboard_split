@@ -36,7 +36,10 @@
 
 #define SOFT_SERIAL_PIN D2  // or D1, D2, D3, E6
 
-#define SPLIT_USB_DETECT
+#define EE_HANDS
+
+#define MASTER_LEFT
+
 
 #define RGB_DI_PIN D5
 #define RGBLED_SPLIT { 2, 2 }
