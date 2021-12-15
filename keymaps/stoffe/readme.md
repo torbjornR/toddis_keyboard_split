@@ -1,1 +1,1 @@
-# The default keymap for toddis_keyboard_splitt
+# keymap stoffe for toddis_keyboard_split

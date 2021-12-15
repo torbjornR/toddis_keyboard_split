@@ -29,16 +29,17 @@
  */
 #define MATRIX_ROW_PINS { F7, F1, F4, F5 }
 #define MATRIX_COL_PINS {D7, B4, B5, C6, B6, C7}
-#define UNUSED_PINS
+
 
 /* COL2ROW, ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
-#define SOFT_SERIAL_PIN D2  // or D1, D2, D3, E6
+#define USE_SERIAL
+#define SOFT_SERIAL_PIN D2  
+
 
 #define EE_HANDS
 
-#define MASTER_LEFT
 
 
 #define RGB_DI_PIN D5
