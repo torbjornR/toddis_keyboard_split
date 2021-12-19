@@ -53,10 +53,16 @@
 //#define BACKLIGHT_BREATHING
 
 #define RGB_DI_PIN D5
-#define RGBLED_SPLIT {2, 2}
 #define RGBLED_NUM 4
-#define RGBLIGHT_LED_MAP { 0, 1, 2, 3}
+#define RGBLIGHT_SPLIT
+#define RGBLED_SPLIT {2, 2}
+
 #define RGBLIGHT_LAYERS
+#define RGBLIGHT_SLEEP
+#define RGBLIGHT_SPLIT
+#define RPBLIGHT_LIMIT_VAL 200
+
+
 
 //#ifdef RGB_DI_PIN
 //#    define RGBLED_NUM 16

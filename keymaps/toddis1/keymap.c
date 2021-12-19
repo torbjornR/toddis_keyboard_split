@@ -3,30 +3,6 @@
 
 #include QMK_KEYBOARD_H
 
-//my lighting
-/*
-const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS (
-	{1, 4, HSV_CYAN}
-);
-const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS (
-	{1, 4, HSV_RED}
-);
-
-
-// Now define the array of layers. Later layers take precedence
-// Now define the array of layers. Later layers take precedence
-const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    my_layer1_layer,    // Overrides caps lock layer
-    my_layer2_layer,    // Overrides other layers
-);
-
-void keyboard_post_init_user(void) {
-    // Enable the LED layers
-    rgblight_layers = my_rgb_layers;
-}
-
-
-*/
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
@@ -39,10 +15,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
     // left hand
     
-    KC_TAB,   KC_QUOT, KC_COMM, KC_DOT,   KC_P,    KC_Y,
-    KC_CAPS,   KC_A,    KC_O, 	KC_E,     KC_U,    KC_I,
-    KC_LSFT,  KC_SCOLON, KC_Q,    KC_J,     KC_K,    KC_X,
-    				KC_LALT,  LT(_LAY1, KC_HOME), LT(_LAY0, KC_END),
+    KC_TAB,   KC_QUOT, 	      KC_COMM,  KC_DOT, KC_P, KC_Y,
+    KC_CAPS,  KC_A, KC_O,     KC_E,   KC_U, KC_I,
+    KC_LSFT,  KC_SCOLON,                              KC_Q,     KC_J,   KC_K, KC_X,
+    				    KC_LALT, LT(_LAY1, KC_HOME), LT(_LAY0, KC_END),
 
     // right hand 
     KC_F,  KC_G, KC_C, KC_R, KC_L, KC_SLSH,
@@ -80,3 +56,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 };
+
+
+const rgblight_segment_t PROGMEM my_base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0, 4, HSV_BLUE}
+);
+
+const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0, 4, HSV_RED}
+);
+
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+	my_base_layer,
+	my_layer1_layer	
+);
+
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+	rgblight_set_layer_state(0, layer_state_cmp(state, _BASE));
+	rgblight_set_layer_state(1, layer_state_cmp(state, _LAY0));
+	rgblight_set_layer_state(2, layer_state_cmp(state, _LAY1));
+	return state;
+}
+
+void keyboard_post_init_user(void) {
+	rgblight_layers = my_rgb_layers;
+}
