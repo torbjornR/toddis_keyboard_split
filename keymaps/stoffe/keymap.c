@@ -1,7 +1,8 @@
-// Copyright 2021 torbjorn rasmusson (@torbjorn rasmusson)
+// Copyright 2021 torbjorn rasmusson (@torbjorn rasmuss
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+
 
 enum layers { BASE, LAY0, LAY1, LAY2, LAY3, LAY4, LAY5 };
 
@@ -9,6 +10,15 @@ enum custom_keycodes {
   M_NAME = SAFE_RANGE,
   M_CD_DOT,
 };
+
+// tap dance declarations
+enum {
+    _TD_KC_SCLN = 0,
+    _TD_KC_SLSH = 1,
+};
+
+#define TD_KC_SCLN TD(_TD_KC_SCLN)
+#define TD_KC_SLSH TD(_TD_KC_SLSH)
 
 enum unicode_names {
   SE_AA_H,
@@ -31,7 +41,8 @@ enum unicode_names {
   UWHALE,
   UBOMB,
   UFACE_ROLLING_EYES,
-  THNK
+  THNK,
+  PARTY
 };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -56,11 +67,10 @@ const uint32_t PROGMEM unicode_map[] = {
   [UBOMB] = 0x1F4A3,    // 💣
   [UFACE_ROLLING_EYES] = 0x1F644, // 🙄
   [THNK] = 0x1F914, // 🤔
+  [PARTY] = 0x1F973, // 🥳
 };
-#define FN_BSPC LT(_FUNCTION, KC_BSPC)
-#define FN_SCLN LT(_FUNCTION, KC_SCLN)
 
-#define WIN_KC_K WIN_T(KC_K)
+
 
 #define CTL_KC_I RCTL_T(KC_I)
 #define CTL_KC_R LCTL_T(KC_R)
@@ -83,18 +93,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   __  _   _____
 //  / _)/_| ( (_
 // /(_)(  |__)/__
+
     [BASE] = LAYOUT(
     // left hand
-    _______,  KC_Q, KC_W, KC_F, KC_P, KC_B,
-    _______,  SHFT_KC_A, CTL_KC_R, KC_S, KC_T, KC_G,
-    _______,  KC_Z, KC_X, KC_C, KC_D, KC_V,
-    	        LT(LAY0, KC_DEL),LT(LAY1, KC_BSPC),LT(LAY2, KC_ENT),
+    KC_ESC,  KC_Q, KC_W, KC_F, KC_P, KC_B,
+    KC_LALT,  SHFT_KC_A, CTL_KC_R, KC_S, KC_T, KC_G,
+    KC_LWIN,  KC_Z, KC_X, KC_C, KC_D, KC_V,
+     LT(LAY0, KC_DEL),LT(LAY1, KC_BSPC),LT(LAY2, KC_TAB),
 
     // right hand
-    KC_J,  KC_L, KC_U, KC_Y, KC_SCLN, _______,
-    KC_M,  KC_N, KC_E, CTL_KC_I, SHFT_KC_O, _______,
-    KC_K,  KC_H, KC_COMM, ALGR_T(KC_DOT), KC_SLSH, _______,
-    LT(LAY3, KC_TAB),  LT(LAY4, KC_SPC), LT(LAY5, KC_ESC)
+    KC_J,  KC_L, KC_U, KC_Y, TD_KC_SCLN, _______,
+    KC_M,  KC_N, KC_E, CTL_KC_I, SHFT_KC_O, KC_RALT,
+    KC_K,  KC_H, KC_COMM, ALGR_T(KC_DOT), TD_KC_SLSH, KC_LWIN,
+    LT(LAY3, KC_ENT),  LT(LAY4, KC_SPC), LT(LAY5, KC_ESC)
     ),
 //      _        __
 //  /  /_|(__/  /  )
@@ -125,10 +136,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     	               _______, _______, _______,
 
     // right hand
-    U_RDO,  U_PST, KC_UP, U_CPY, U_UND, _______,
-    KC_M,  KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
-    KC_HOME,  KC_PGDN, KC_PGUP, KC_END, KC_INS, _______,
-    KC_ENT,  KC_BSPC, KC_DEL
+    KC_PGUP, KC_HOME, KC_UP, KC_END, KC_INS, _______,
+    KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
+    U_RDO,   U_CPY,   U_CUT, U_PST ,U_UND, _______,
+    _______,  _______, _______
     ),
 //      _       _
 //  /  /_|(__/  _)
@@ -139,13 +150,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______, _______, _______, _______, _______,
     _______,  KC_LSPO, KC_LCTL, KC_LALT, _______, _______,
     _______,  _______, _______, _______, _______, _______,
-    	               _______, _______, _______,
-
+    _______, _______, _______,
     // right hand
-    _______,  KC_F7, KC_F8, KC_F9, _______, _______,
-    _______,  KC_F4, KC_F5, KC_F6, _______, _______,
-    _______,  KC_F1, KC_F2, KC_F3, _______, _______,
-    KC_TAB,  KC_SPC, KC_ESC
+    KC_LCBR, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR, _______,
+    KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS, _______,
+    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _______,
+    KC_LPRN, KC_RPRN, KC_UNDS
     ),
 //      _       _
 //  /  /_|(__/  _)
@@ -153,16 +163,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [LAY3] = LAYOUT(
     // left hand
-    KC_Q,  KC_Q, KC_W, KC_F, KC_P, KC_B,
-    KC_A,  KC_A, KC_R, KC_S, KC_T, KC_G,
-    KC_A,  KC_Z, KC_X, KC_C, KC_D, _______,
-    	               KC_DEL, KC_BSPC, KC_ENT,
-
+    _______,  _______, _______, KC_MUTE, _______, KC_VOLU,
+    _______,  _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD,
+    _______,  _______, _______, _______, _______, _______,
+    	               _______, _______, _______,
     // right hand
-    _______,  _______, _______, _______, _______, _______,
-    _______,  KC_LSPO, KC_LCTL, KC_LALT, _______, _______,
-    _______,  _______, _______, _______, _______, _______,
-    	               _______, _______, _______
+    _______,KC_F9, KC_F10, KC_F11, KC_F12, _______,
+    _______,KC_F5, KC_F6 , KC_F7 , KC_F8 , _______,
+    _______,KC_F1, KC_F2 , KC_F3 , KC_F4 , _______,
+    KC_TAB,  KC_SPC, KC_ESC
+
     ),
 //      _
 //  /  /_|(__/ (_/
@@ -170,10 +180,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [LAY4] = LAYOUT(
     // left hand
-    KC_Q,  KC_Q, KC_W, KC_F, KC_P, KC_B,
-    KC_A,  KC_A, KC_R, KC_S, KC_T, KC_G,
-    KC_A,  KC_Z, KC_X, KC_C, KC_D, _______,
-    	               KC_DEL, KC_BSPC, KC_ENT,
+    _______,  _______, _______, _______, _______, _______,
+    _______,  _______, _______, _______, _______, _______,
+    _______,  _______, _______, _______, _______, _______,
+    	               _______, _______, _______,
 
     // right hand
     _______,  _______, _______, _______, _______, _______,
@@ -188,8 +198,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LAY5] = LAYOUT(
     // left hand
     X(USMIL),  X(UKB), X(UCOFFEE), X(UVOLT), X(UBEER), X(UTHMUP),
-    _______,  _______, XP(SE_AA_L, SE_AA_H), XP(SE_AE_L, SE_AE_H), XP(SE_OE_L, SE_OE_H), KC_G,
-    _______,   X(UORHEART), X(UBIC), X(UNERD),   X(UBUG), X(UPARTY),
+    X(THNK),  X(PARTY), XP(SE_AA_L, SE_AA_H), XP(SE_AE_L, SE_AE_H), XP(SE_OE_L, SE_OE_H), _______,
+    X(UBOMB),   X(UORHEART), X(UBIC), X(UNERD),   X(UBUG), X(UPARTY),
     	               _______, _______, _______,
 
     // right hand
@@ -240,20 +250,19 @@ const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 	);
 
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,2,HSV_BLUE}
+		{0,4,HSV_BLUE}
 	);
 
-
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{2,2,HSV_PURPLE}
+		{0,4,HSV_PURPLE}
 	);
 
 const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{2,2,HSV_TURQUOISE}
+		{0,4,HSV_TURQUOISE}
 	);
 
 const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{2,2,HSV_RED}
+		{0,4,HSV_RED}
 	);
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
@@ -282,3 +291,13 @@ void keyboard_post_init_user(void) {
 	//Enable the LED layers
 	rgblight_layers = my_rgb_layers;
 }
+
+
+
+// Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for first parameter, twice for second
+    [_TD_KC_SCLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, LSFT(KC_SCLN) ),
+    [_TD_KC_SLSH] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, LSFT(KC_SLSH) )
+
+};
