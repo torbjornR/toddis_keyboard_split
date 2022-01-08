@@ -99,13 +99,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_Q, KC_W, KC_F, KC_P, KC_B,
     KC_LALT,  SHFT_KC_A, CTL_KC_R, KC_S, KC_T, KC_G,
     KC_LWIN,  KC_Z, KC_X, KC_C, KC_D, KC_V,
-     LT(LAY0, KC_DEL),LT(LAY1, KC_BSPC),LT(LAY2, KC_TAB),
+     LT(LAY0, KC_DEL),LT(LAY1, KC_SPC),LT(LAY2, KC_TAB),
 
     // right hand
     KC_J,  KC_L, KC_U, KC_Y, TD_KC_SCLN, _______,
     KC_M,  KC_N, KC_E, CTL_KC_I, SHFT_KC_O, KC_RALT,
     KC_K,  KC_H, KC_COMM, ALGR_T(KC_DOT), TD_KC_SLSH, KC_LWIN,
-    LT(LAY3, KC_ENT),  LT(LAY4, KC_SPC), LT(LAY5, KC_ESC)
+    LT(LAY3, KC_ENT),  LT(LAY4, KC_SPC ), LT(LAY5, KC_BSPC)
     ),
 //      _        __
 //  /  /_|(__/  /  )
@@ -138,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // right hand
     KC_PGUP, KC_HOME, KC_UP, KC_END, KC_INS, _______,
     KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
-    U_RDO,   U_CPY,   U_CUT, U_PST ,U_UND, _______,
+    U_RDO,   U_CPY,   U_CUT, U_PST ,U_UND, M_CD_DOT,
     _______,  _______, _______
     ),
 //      _       _
