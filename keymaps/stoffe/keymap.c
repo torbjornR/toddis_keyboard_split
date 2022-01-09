@@ -2,31 +2,23 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+#include "keymap_swedish.h"
 
 
 enum layers { BASE, LAY0, LAY1, LAY2, LAY3, LAY4, LAY5 };
 
 enum custom_keycodes {
   M_NAME = SAFE_RANGE,
+  COMM,     // , | <
+  DOT,      // . | >
+  SLSH,     // / | ?
+  SCLN,     // ; | :
+  QUOT,     // ' | "
   M_CD_DOT,
 };
 
-// tap dance declarations
-enum {
-    _TD_KC_SCLN = 0,
-    _TD_KC_SLSH = 1,
-};
-
-#define TD_KC_SCLN TD(_TD_KC_SCLN)
-#define TD_KC_SLSH TD(_TD_KC_SLSH)
 
 enum unicode_names {
-  SE_AA_H,
-  SE_AE_H,
-  SE_OE_H,
-  SE_AA_L,
-  SE_AE_L,
-  SE_OE_L,
   UKB,
   UCOFFEE,
   UVOLT,
@@ -46,12 +38,6 @@ enum unicode_names {
 };
 
 const uint32_t PROGMEM unicode_map[] = {
-  [SE_AA_H] = 0x00C5,
-  [SE_AE_H] = 0x00C4,
-  [SE_OE_H] = 0x00D6,
-  [SE_AA_L] = 0x00E5,
-  [SE_AE_L] = 0x00E4,
-  [SE_OE_L] = 0x00F6,
   [UKB]     = 0x2328,   // ⌨
   [UCOFFEE] = 0x2615,   // ☕
   [UVOLT]   = 0x26A1,   // ⚡
@@ -70,6 +56,42 @@ const uint32_t PROGMEM unicode_map[] = {
   [PARTY] = 0x1F973, // 🥳
 };
 
+// SWEDISH LETTERS AND SYMBOLS
+// Letters
+#define KC_SE_AA KC_LBRC               // Å
+#define KC_SE_AE KC_QUOT               // Ä
+#define KC_SE_OE KC_SCLN               // Ö
+#define KC_SE_QUO KC_BSLS              // '
+#define KC_SE_COL S(KC_DOT)            // :
+#define KC_SE_SEMI S(KC_COMM)          // ;
+#define KC_SE_EXCL S(KC_1)             // !
+#define KC_SE_DQUO S(KC_2)             // "
+#define KC_SE_HASH S(KC_3)             // #
+#define KC_SE_PERC S(KC_5)             // %
+#define KC_SE_AMPR S(KC_6)             // &
+#define KC_SE_SLSH S(KC_7)             // /
+#define KC_SE_LPRN S(KC_8)             // (
+#define KC_SE_RPRN S(KC_9)             // )
+#define KC_SE_EQAL S(KC_0)             // =
+#define KC_SE_CIRC S(KC_RBRACKET)      // ^
+#define KC_SE_AT RALT(KC_2)            // @
+#define KC_SE_DLR RALT(KC_4)           // $
+#define KC_SE_LCBR RALT(KC_7)          // {
+#define KC_SE_LBRC RALT(KC_8)          // [
+#define KC_SE_RBRC RALT(KC_9)          // ]
+#define KC_SE_RCBR RALT(KC_0)          // }
+#define KC_SE_TILD RALT(KC_RBRACKET)   // ~
+#define KC_SE_DIAE KC_RBRACKET         // ¨
+#define KC_SE_ACUT KC_EQL              // ´
+#define KC_SE_MINS KC_SLASH            // -
+#define KC_SE_GRAV KC_PLUS             // `
+#define KC_SE_LESS KC_NUBS             // <
+#define KC_SE_MORE S(KC_NUBS)          // >
+#define KC_SE_PLUS KC_MINS             // +
+#define KC_SE_ASTR S(KC_BSLS)          // *
+#define KC_SE_QUES S(KC_MINS)          // ?
+#define KC_SE_BSLH RALT(KC_MINS)       /* \ */
+#define KC_SE_PIPE RALT(KC_NUBS)       // |
 
 
 #define CTL_KC_I RCTL_T(KC_I)
@@ -99,13 +121,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_Q, KC_W, KC_F, KC_P, KC_B,
     KC_LALT,  SHFT_KC_A, CTL_KC_R, KC_S, KC_T, KC_G,
     KC_LWIN,  KC_Z, KC_X, KC_C, KC_D, KC_V,
-     LT(LAY0, KC_DEL),LT(LAY1, KC_SPC),LT(LAY2, KC_TAB),
+      LT(LAY0, KC_DEL),LT(LAY1, KC_BSPC),LT(LAY2, KC_TAB),
 
     // right hand
-    KC_J,  KC_L, KC_U, KC_Y, TD_KC_SCLN, _______,
+    KC_J,  KC_L, KC_U, KC_Y, SCLN, QUOT,
     KC_M,  KC_N, KC_E, CTL_KC_I, SHFT_KC_O, KC_RALT,
-    KC_K,  KC_H, KC_COMM, ALGR_T(KC_DOT), TD_KC_SLSH, KC_LWIN,
-    LT(LAY3, KC_ENT),  LT(LAY4, KC_SPC ), LT(LAY5, KC_BSPC)
+    KC_K,  KC_H, COMM, DOT, SLSH, KC_LWIN,
+    LT(LAY3, KC_ENT),  LT(LAY4, KC_SPC ), LT(LAY5, KC_ESC )
     ),
 //      _        __
 //  /  /_|(__/  /  )
@@ -119,10 +141,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     	               _______, _______, _______,
 
     // right hand
-    KC_LBRC,  KC_7, KC_8, KC_9, KC_RBRC, _______,
-    KC_SCLN,  KC_4, KC_5, KC_6, KC_EQL, _______,
-    KC_BSLS,  KC_1, KC_2, KC_3, KC_GRV, _______,
-    KC_DOT,  KC_0, KC_MINS
+    KC_SE_LBRC,  KC_7, KC_8, KC_9, KC_SE_RBRC, _______,
+    SCLN,  KC_4, KC_5, KC_6, KC_SE_EQAL, _______,
+    KC_SE_BSLH,  KC_1, KC_2, KC_3, KC_SE_GRAV, _______,
+    DOT,  KC_0, KC_SE_MINS
     ),
 //      _
 //  /  /_|(__/ -/
@@ -130,9 +152,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [LAY1] = LAYOUT(
     // left hand
-    _______,  _______, _______, _______, _______, _______,
-    _______,  KC_LSPO, KC_LCTL, KC_LALT, _______, _______,
-    _______,  _______, _______, _______, _______, _______,
+    _______,  _______, _______, _______, KC_SE_DIAE, KC_SE_ACUT,
+    _______,  KC_LSPO, KC_LCTL, KC_LALT, KC_SE_DQUO, _______,
+    _______,  _______, _______, _______, SLSH, _______,
     	               _______, _______, _______,
 
     // right hand
@@ -152,10 +174,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______, _______, _______, _______, _______,
     _______, _______, _______,
     // right hand
-    KC_LCBR, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR, _______,
-    KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS, _______,
-    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _______,
-    KC_LPRN, KC_RPRN, KC_UNDS
+    KC_SE_QUO ,KC_SE_PIPE , KC_SE_ASTR, KC_SE_LCBR, KC_SE_RCBR, _______,
+    KC_SE_COL, KC_SE_HASH ,  KC_SE_PERC, KC_SE_CIRC, KC_SE_PLUS, _______,
+    KC_SE_TILD, KC_SE_EXCL, KC_SE_AT, KC_SE_DLR , KC_SE_AMPR  , _______,
+    KC_SE_LPRN, KC_SE_RPRN, KC_UNDS
     ),
 //      _       _
 //  /  /_|(__/  _)
@@ -198,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LAY5] = LAYOUT(
     // left hand
     X(USMIL),  X(UKB), X(UCOFFEE), X(UVOLT), X(UBEER), X(UTHMUP),
-    X(THNK),  X(PARTY), XP(SE_AA_L, SE_AA_H), XP(SE_AE_L, SE_AE_H), XP(SE_OE_L, SE_OE_H), _______,
+    X(THNK),  X(PARTY), KC_SE_AA, KC_SE_AE, KC_SE_OE, _______,
     X(UBOMB),   X(UORHEART), X(UBIC), X(UNERD),   X(UBUG), X(UPARTY),
     	               _______, _______, _______,
 
@@ -230,6 +252,80 @@ switch (keycode) {
       }
       return false;
       break;
+    case COMM:    // , | <
+      if (record->event.pressed){
+        if (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT)){
+            unregister_code16(KC_LSFT);  // Remove shift before sending the keycode
+            register_code16(SE_LABK);
+            register_code16(KC_LSFT);
+        } else {
+          register_code16(KC_COMM);
+        }
+      } else {
+        unregister_code16(KC_GRV);
+        unregister_code16(SE_LABK);
+        unregister_code16(KC_COMM);
+      }
+      return false;
+      break;
+
+    case DOT:    // . | >
+      if (record->event.pressed){
+        if (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT)){
+            register_code16(SE_RABK);
+        } else {
+          register_code16(KC_DOT);
+        }
+      } else {
+        unregister_code16(KC_GRV);
+        unregister_code16(SE_RABK);
+        unregister_code16(KC_DOT);
+      }
+      return false;
+      break;
+
+    case SLSH:    // / | ?
+      if (record->event.pressed){
+        if (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT)){
+          register_code16(SE_QUES);
+        } else {
+          register_code16(SE_SLSH);
+        }
+      } else {
+        unregister_code16(SE_QUES);
+        unregister_code16(SE_SLSH);
+      }
+      return false;
+      break;
+
+    case SCLN:    // ; | :
+      if (record->event.pressed){
+        if (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT)){
+          register_code16(SE_COLN);
+        } else {
+          register_code16(SE_SCLN);
+        }
+      } else {
+        unregister_code16(SE_COLN);
+        unregister_code16(SE_SCLN);
+      }
+      return false;
+      break;
+
+    case QUOT:    // ' | "
+      if (record->event.pressed){
+        if (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT)){
+          register_code16(SE_DQUO);
+        } else {
+          register_code16(SE_QUOT);
+        }
+      } else {
+        unregister_code16(SE_DQUO);
+        unregister_code16(SE_QUOT);
+      }
+      return false;
+      break;
+
     }
     return true;
 }
@@ -291,13 +387,3 @@ void keyboard_post_init_user(void) {
 	//Enable the LED layers
 	rgblight_layers = my_rgb_layers;
 }
-
-
-
-// Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for first parameter, twice for second
-    [_TD_KC_SCLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, LSFT(KC_SCLN) ),
-    [_TD_KC_SLSH] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, LSFT(KC_SLSH) )
-
-};
