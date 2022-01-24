@@ -15,6 +15,7 @@ enum custom_keycodes {
   SCLN,     // ; | :
   QUOT,     // ' | "
   M_CD_DOT,
+  M_GIT_ST,
 };
 
 
@@ -127,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_J,  KC_L, KC_U, KC_Y, SCLN, QUOT,
     KC_M,  KC_N, KC_E, CTL_KC_I, SHFT_KC_O, KC_RALT,
     KC_K,  KC_H, COMM, DOT, SLSH, KC_LWIN,
-    LT(LAY3, KC_ENT),  LT(LAY4, KC_SPC ), LT(LAY5, KC_ESC )
+    LT(LAY3, KC_ENT),  LT(LAY4, KC_SPC ), LT(LAY5, KC_LWIN )
     ),
 //      _        __
 //  /  /_|(__/  /  )
@@ -138,13 +139,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RESET,  _______, _______, _______, _______, _______,
     _______,  KC_LSPO, KC_LCTL, KC_LALT, _______, _______,
     _______,  _______, _______, _______, _______, _______,
-    	               _______, _______, _______,
+    _______, _______, _______,
 
     // right hand
-    KC_SE_LBRC,  KC_7, KC_8, KC_9, KC_SE_RBRC, _______,
-    SCLN,  KC_4, KC_5, KC_6, KC_SE_EQAL, _______,
-    KC_SE_BSLH,  KC_1, KC_2, KC_3, KC_SE_GRAV, _______,
-    DOT,  KC_0, KC_SE_MINS
+    KC_SE_PLUS ,  KC_7, KC_8, KC_9, KC_SE_BSLH, _______,
+    KC_SE_MINS,  KC_4, KC_5, KC_6, _______, _______,
+    KC_SE_EQAL,  KC_1, KC_2, KC_3, KC_SE_GRAV, _______,
+     KC_SE_LPRN,  KC_0, KC_SE_RPRN
     ),
 //      _
 //  /  /_|(__/ -/
@@ -152,32 +153,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [LAY1] = LAYOUT(
     // left hand
-    _______,  _______, _______, _______, KC_SE_DIAE, KC_SE_ACUT,
-    _______,  KC_LSPO, KC_LCTL, KC_LALT, KC_SE_DQUO, _______,
-    _______,  _______, _______, _______, SLSH, _______,
-    	               _______, _______, _______,
+    _______,  _______, _______, _______,_______ ,_______ ,
+    _______,  KC_LSPO, KC_LCTL, KC_LALT,_______ , _______,
+    _______,  _______, _______, _______,_______, _______,
+    _______, _______, _______,
 
     // right hand
     KC_PGUP, KC_HOME, KC_UP, KC_END, KC_INS, _______,
-    KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
-    U_RDO,   U_CPY,   U_CUT, U_PST ,U_UND, M_CD_DOT,
-    _______,  _______, _______
+    KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, M_GIT_ST, _______,
+    U_CPY, U_CUT, U_PST, U_RDO ,U_UND, M_CD_DOT,
+    KC_SE_LCBR,  _______, KC_SE_RCBR
     ),
-//      _       _
+//      _
 //  /  /_|(__/  _)
 // (__(  | /   /__
 
     [LAY2] = LAYOUT(
     // left hand
-    _______,  _______, _______, _______, _______, _______,
-    _______,  KC_LSPO, KC_LCTL, KC_LALT, _______, _______,
+    _______,  _______, _______, _______, KC_SE_DQUO, _______,
+    _______,  KC_LSPO, KC_LCTL, KC_LALT, KC_SE_DIAE, KC_SE_ACUT,
     _______,  _______, _______, _______, _______, _______,
     _______, _______, _______,
     // right hand
-    KC_SE_QUO ,KC_SE_PIPE , KC_SE_ASTR, KC_SE_LCBR, KC_SE_RCBR, _______,
-    KC_SE_COL, KC_SE_HASH ,  KC_SE_PERC, KC_SE_CIRC, KC_SE_PLUS, _______,
-    KC_SE_TILD, KC_SE_EXCL, KC_SE_AT, KC_SE_DLR , KC_SE_AMPR  , _______,
-    KC_SE_LPRN, KC_SE_RPRN, KC_UNDS
+    KC_SE_QUO ,KC_SE_AMPR  , KC_SE_ASTR, KC_SE_LCBR, KC_SE_RCBR, _______,
+    KC_SE_COL,  KC_SE_DLR,  KC_SE_PERC, KC_SE_CIRC, KC_SE_PLUS, _______,
+    KC_SE_TILD, KC_SE_EXCL, KC_SE_AT, KC_SE_HASH  , KC_SE_PIPE  , _______,
+    KC_SE_LBRC, KC_SE_MINS, KC_SE_RBRC
     ),
 //      _       _
 //  /  /_|(__/  _)
@@ -203,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LAY4] = LAYOUT(
     // left hand
     _______,  _______, _______, _______, _______, _______,
-    _______,  _______, _______, _______, _______, _______,
+    _______,  _______, KC_SE_AA, KC_SE_AE, KC_SE_OE, _______,
     _______,  _______, _______, _______, _______, _______,
     	               _______, _______, _______,
 
@@ -249,6 +250,12 @@ switch (keycode) {
     case M_CD_DOT:
       if (record->event.pressed) {
           SEND_STRING("cd .."SS_TAP(X_ENTER)"");
+      }
+      return false;
+      break;
+    case M_GIT_ST:
+      if (record->event.pressed) {
+          SEND_STRING("git status"SS_TAP(X_ENTER)"");
       }
       return false;
       break;
