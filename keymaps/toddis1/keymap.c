@@ -76,9 +76,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // right hand 
     _______,  KC_7,  KC_8,  KC_9, _______, KC_EQL,
-    _______,  KC_4,  KC_5,  KC_6, _______, _______,
+    _______,  KC_4,  KC_5,  KC_6, _______, KC_BSLS,
     _______,  KC_1,  KC_2,  KC_3, _______, KC_RSFT,
-    KC_0,     KC_NO, KC_NO
+    KC_0,     _______, _______
     ),
     
     [_LAY1] = LAYOUT( 
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     UC_MOD,   XP(SE_AA_L, SE_AA_H), XP(SE_AE_L, SE_AE_H), XP(SE_OE_L, SE_OE_H), _______, _______,
     _______,  _______, _______, _______, _______, _______,
     _______,  _______, _______, _______, _______, _______,
-    	                        KC_NO,   KC_NO,   KC_NO,
+    	                        _______, _______, _______,
 
     // right hand 
     _______,  _______, _______, _______, _______, _______,
@@ -97,8 +97,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
     [_LAY2] = LAYOUT( 
     // left hand 
-    _______,  _______, _______, _______, _______, _______, 
-    _______,  KC_S, _______, _______, _______, _______,
+    _______,  KC_F3,   C(F3),   KC_F6,   KC_F8,   KC_F9, 
+    _______,  _______, KC_R, 	KC_W, 	 S(F6),   KC_DEL,
     _______,  _______, _______, _______, _______, _______,
     	                        _______, _______, _______,
 
