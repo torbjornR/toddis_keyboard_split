@@ -5,7 +5,7 @@
 #include "keymap_swedish.h"
 
 
-enum layers { BASE, LAY0, LAY1, LAY2, LAY3, LAY4, LAY5 };
+enum layers { BASE, LAY0, LAY1, LAY2, LAY3, LAY4, LAY5, LAY6 };
 
 enum custom_keycodes {
   M_NAME = SAFE_RANGE,
@@ -175,9 +175,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______, _______, _______, _______, _______,
     _______, _______, _______,
     // right hand
-    KC_SE_QUO ,KC_SE_AMPR  , KC_SE_ASTR, KC_SE_LCBR, KC_SE_RCBR, _______,
-    KC_SE_COL,  KC_SE_DLR,  KC_SE_PERC, KC_SE_CIRC, KC_SE_PLUS, _______,
-    KC_SE_TILD, KC_SE_EXCL, KC_SE_AT, KC_SE_HASH  , KC_SE_PIPE  , _______,
+    KC_SE_QUO,  KC_SE_AMPR, KC_SE_ASTR, _______, _______, _______,
+    KC_SE_COL,  KC_SE_DLR,  KC_SE_PERC, KC_SE_CIRC, _______, _______,
+    KC_SE_TILD, KC_SE_EXCL, KC_SE_AT, KC_SE_HASH, KC_SE_PIPE, _______,
     KC_SE_LBRC, KC_SE_MINS, KC_SE_RBRC
     ),
 //      _       _
@@ -221,9 +221,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LAY5] = LAYOUT(
     // left hand
     X(USMIL),  X(UKB), X(UCOFFEE), X(UVOLT), X(UBEER), X(UTHMUP),
-    X(THNK),  X(PARTY), KC_SE_AA, KC_SE_AE, KC_SE_OE, _______,
+    X(THNK),  X(PARTY), KC_SE_AA, KC_SE_AE, KC_SE_OE, TG(LAY6),
     X(UBOMB),   X(UORHEART), X(UBIC), X(UNERD),   X(UBUG), X(UPARTY),
-    	               _______, _______, _______,
+    _______, _______, _______,
 
     // right hand
     _______,  _______, _______, _______, _______, RESET,
@@ -232,6 +232,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______, _______
     ),
 
+//    LAY 6
+
+    [LAY6] = LAYOUT(
+    // left hand
+    _______,  KC_PGUP, _______, KC_UP, _______, _______,
+    _______,  KC_PGDN, KC_LEFT, KC_DOWN , KC_RGHT, TG(LAY6),
+    _______,  _______, _______, _______, _______, _______,
+    _______,  _______, _______,
+
+    // right hand
+    KC_SE_PLUS,  KC_7, KC_8, KC_9, _______, _______,
+    KC_SE_MINS,  KC_4, KC_5, KC_6, _______, _______,
+    KC_SE_EQAL,  KC_1, KC_2, KC_3, _______, _______,
+    _______,  KC_0, _______
+    )
 
 };
 
@@ -337,9 +352,6 @@ switch (keycode) {
     return true;
 }
 
-
-
-
 const rgblight_segment_t PROGMEM my_base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 		{0,4,HSV_OFF}
 	);
@@ -368,6 +380,10 @@ const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 		{0,4,HSV_RED}
 	);
 
+const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0,4,HSV_TURQUOISE}
+	);
+
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 		my_base_layer,
 		my_layer0_layer,
@@ -375,7 +391,8 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 		my_layer2_layer,
 		my_layer3_layer,
 		my_layer4_layer,
-		my_layer5_layer
+		my_layer5_layer,
+		my_layer6_layer
 	);
 
 //Set the appropriate layer color
@@ -387,6 +404,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(4, layer_state_cmp(state, LAY3));
     rgblight_set_layer_state(5, layer_state_cmp(state, LAY4));
     rgblight_set_layer_state(6, layer_state_cmp(state, LAY5));
+    rgblight_set_layer_state(7, layer_state_cmp(state, LAY6));
     return state;
 }
 
