@@ -16,7 +16,6 @@ enum custom_keycodes {
   QUOT,     // ' | "
   M_CD_DOT,
   M_GIT_ST,
-  O_LINECMD,
 };
 
 
@@ -304,12 +303,6 @@ switch (keycode) {
     case M_CD_DOT:
       if (record->event.pressed) {
           SEND_STRING("cd .."SS_TAP(X_ENTER)"");
-      }
-      return false;
-      break;
-    case O_LINECMD:
-      if (record->event.pressed) {
-          send_unicode_string("TH⍜SE");
       }
       return false;
       break;
