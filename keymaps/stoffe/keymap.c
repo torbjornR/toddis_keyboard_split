@@ -120,6 +120,7 @@ const uint32_t PROGMEM unicode_map[] = {
 #define VS_LINE LCTL(KC_G)
 #define VS_SYMBOLEDITOR LCTL(LSFT(KC_O))
 #define VS_DEFINITION KC_F12
+#define VS_DEF_PEAK LALT(KC_F12)
 #define VS_IMPLEMENTATION LCTL(KC_F12)
 #define VS_REFERENCES LSFT(KC_F12)
 #define VS_BACK LALT(KC_LEFT)
@@ -131,7 +132,8 @@ const uint32_t PROGMEM unicode_map[] = {
 #define VS_CLOSEPANEL LCTL(LSFT(KC_W))
 #define VS_GROUP_1 LCTL(KC_1)
 #define VS_GROUP_2 LCTL(KC_2)
-#define VS_TERMINAL LCTL(KC_GRAVE)
+#define VS_TERMINAL LCTL(LSFT(KC_F10))
+#define VS_TERMINAL_CLOSE LCTL(LSFT(KC_F11))
 #define VS_BUILD LCTL(LSFT(KC_B))
 #define VS_COMMANDS LCTL(LSFT(KC_P))
 #define VS_CMT_BLOCK LSFT(LALT(KC_A))
@@ -148,6 +150,7 @@ const uint32_t PROGMEM unicode_map[] = {
 #define VS_BM_TOGGLE LCTL(LALT(KC_K))
 #define VS_BM_LABEL LCTL(LALT(KC_B))
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   __  _   _____
 //  / _)/_| ( (_
@@ -155,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [BASE] = LAYOUT(
     // left hand
-    KC_ESC,  KC_Q, KC_W, KC_F, KC_P, KC_B,
+    KC_ESC,  KC_Q, KC_W, KC_F, LT(LAY3, KC_P), KC_B,
     KC_LALT,  SHFT_KC_A, CTL_KC_R, KC_S, KC_T, KC_G,
     KC_LWIN,  KC_Z, KC_X, KC_C, KC_D, KC_V,
       LT(LAY0, KC_BSPC ),LT(LAY1, KC_DEL ),LT(LAY2, KC_TAB),
@@ -226,7 +229,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD,
     _______,  _______, _______, _______, _______, _______,
     	               _______, _______, _______,
-    // right hand
+    // right handb
     _______,KC_F9, KC_F10, KC_F11, KC_F12, _______,
     _______,KC_F5, KC_F6 , KC_F7 , KC_F8 , _______,
     _______,KC_F1, KC_F2 , KC_F3 , KC_F4 , _______,
@@ -258,7 +261,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // left hand
     RESET,_______,VS_MV_FILE_PRV , VS_MV_FILE_NXT, VS_GROUP_1, VS_GROUP_2,
     VS_SYMBOLEDITOR,  VS_REFERENCES, VS_IMPLEMENTATION,  VS_DEFINITION ,VS_BACK, VS_FRONT,
-    VS_CLOSEPANEL,  VS_CLOSETAB, _______, _______, VS_TABLEFT, VS_TABRIGHT,
+    VS_TERMINAL_CLOSE,  VS_CLOSETAB, VS_TERMINAL, VS_DEF_PEAK , VS_TABLEFT, VS_TABRIGHT,
     _______,  _______, _______,
 
     // right hand
@@ -285,7 +288,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_SE_EQAL,  KC_1, KC_2, KC_3, DOT, _______,
     _______,  KC_0, _______
     )
-
 };
 
 
