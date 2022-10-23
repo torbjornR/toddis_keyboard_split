@@ -97,10 +97,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
     [_LAY2] = LAYOUT( 
     // left hand 
-    _______,  KC_F3,   C(F3),   KC_F6,   KC_F8,   KC_F9, 
-    _______,  _______, KC_R, 	KC_W, 	 S(F6),   KC_DEL,
-    _______,  _______, _______, _______, _______, _______,
-    	                        _______, _______, _______,
+    _______,  KC_F3,   LCTL(KC_F3), KC_F6,      KC_F8,      KC_F9, 
+    _______,  _______, KC_R, 	    KC_W, 	    S(F6),      KC_DEL,
+	_______,  _______, _______,     LCTL(KC_Z), LCTL(KC_C), LCTL(KC_V),
+    	                            _______,    _______, _______,
 
     // right hand 
     _______,  _______, _______, _______, _______, TG(_BASE),
